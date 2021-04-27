@@ -7,4 +7,15 @@ body{
 .title-1{
     text-align: left;
     margin: 30px 0;
+    font-size: 30px;
+    color: #6a6a6a;
+}
+
+.pagination .page-item button{
+    color: #007F79;
+}
+
+.pagination button.page-link.active{
+    color: #fff;
+    background-color: #007F79;
 }

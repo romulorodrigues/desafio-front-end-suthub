@@ -10,6 +10,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+import '@/assets/icofont.min.css';
 import '@/assets/style.css';
 
 Vue.config.productionTip = false

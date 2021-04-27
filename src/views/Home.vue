@@ -3,7 +3,17 @@
       	<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h1 class="title-1">All countries</h1>
+					<h1 class="title-1"><i class="icofont-world"></i> Países do mundo</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="box">
+						<label for="">Buscar por bloco regional</label>
+						<select name="" id="" class="form-control">
+							<option value=""></option>
+						</select>
+					</div>
 				</div>
 			</div>
         	<div class="row">
@@ -17,19 +27,14 @@
 							</p>
 						</div>
 						<div class="countries-item-footer">
-							<span>
-								<b-icon icon="people-fill"></b-icon>
-								<small>População</small>
-								12312312
-							</span>
-							<span>
-								<b-icon icon="people-fill"></b-icon>
-								12312312
-							</span>
-							<span>
-								<b-icon icon="people-fill"></b-icon>
-								12312312
-							</span>
+							<div class="countries-item-footer-item">
+								<small><i class="icofont-users-alt-5"></i> População</small>
+								<div class="small-info">{{item.population|decimal}}</div>
+							</div>
+							<div class="countries-item-footer-item">
+								<small><i class="icofont-star"></i>Capital</small>
+								<div class="small-info">{{item.capital}}</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -71,6 +76,12 @@ export default {
       	pages: []
     }
   },
+  filters: {
+	decimal: function (value) {
+		if (!value) return ''
+		return new Intl.NumberFormat().format(value)
+	}
+  },
   computed: {
 		displayedCountries () { 
 			this.setPages(this.countries);
@@ -102,7 +113,8 @@ export default {
     getAllCountries(){
       this.$http.get('all')
       .then((response) => {
-        this.countries = response.data;
+		this.countries = response.data;
+		console.log(response.data)
       }).catch(error => console.log(error));
     }
   }
@@ -110,16 +122,26 @@ export default {
 </script>
 
 <style>
-  .countries-item{
+
+	.box{
+		background: #fff;
+		box-shadow: 0px 3px 9px 0px rgb(120 120 120 / 9%);
+		padding: 15px;
+		margin-bottom: 25px;
+		width: 100%;
+		text-align: left;
+	}
+
+  	.countries-item{
 	    display: flex;
 		align-items: center;
 		flex-direction: column;
 		background: #fff;
-		border-radius: 10px;
 		box-shadow: 0px 3px 9px 0px rgb(120 120 120 / 9%);
-		margin-bottom: 25px;
+		margin-bottom: 30px;
 		justify-content: space-between;
-  }
+		color: #6a6a6a;
+  	}
 
   .countries-item-img{
 	  background-size: cover;
@@ -135,19 +157,41 @@ export default {
   }
 
   .countries-item-content h1{
-	  font-size: 20px;
+	  font-size: 18px;
 	  text-align: center;
 	  margin: 0px 0 5px 0;
+	  color: #6a6a6a;
+	  font-weight: 700;
+  }
+
+  .countries-item-content p{
+	  font-size: 11px;
   }
 
   .countries-item-footer{
 	  display: flex;
 	  align-items: center;
-	  border-top: 1px solid #ccc;
+	  border-top: 1px solid #e9e9ea;
 	  width: 100%;
   }
 
-  .countries-item-footer span{
+  .countries-item-footer-item{
+	  flex: 1;
 	  text-align: center;
+	  border-right: 1px solid #e9e9e9;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+    	justify-content: center;
+		padding: 10px;
+  }
+
+  .countries-item-footer-item small{
+	  font-weight: 600;
+	  font-size: 14px;
+  }
+
+  .countries-item-footer-item .small-info{
+	  font-size: 12px;
   }
 </style>
