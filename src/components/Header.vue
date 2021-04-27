@@ -8,17 +8,17 @@
                 <div class="col-lg-8">
                     <ul>
                         <li>
-                            <router-link to="">
+                            <router-link to="/">
                                 Início
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="">
+                            <router-link to="/country/bra">
                                 Sobre o Brasil
                             </router-link>
                         </li>
                         <li>
-                            <button class="button-add-user">
+                            <button class="btn-1">
                                 Novo usuário <b-icon icon="person-plus-fill"></b-icon>
                             </button>
                         </li>
@@ -47,25 +47,6 @@ export default {
         width: 200px;
         margin: 20px 0;
         float: left;
-    }
-
-    .button-add-user{
-        background: rgba(61, 201, 179, 1);
-        border-radius: 5px;
-        color: #fff;
-        font-size: 14px;
-        padding: 5.5px 13px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        display: inline-block;
-        box-shadow: 0px 3px 0px 0px #309383;
-        font-weight: bold;
-        text-shadow: 1px 1px 1px rgb(0 0 0 / 0%);
-        border: none;
-    }
-
-    .button-add-user:hover{
-        background-color: black;
     }
 
     header ul{
