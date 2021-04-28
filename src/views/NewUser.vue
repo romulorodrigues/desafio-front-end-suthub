@@ -121,7 +121,7 @@
 import {TheMask} from 'vue-the-mask';
 import axios from 'axios';
 import Loader from '@/components/Loader';
-import { required, minLength, between } from 'vuelidate/lib/validators'
+import { required, minLength, between, requiredIf } from 'vuelidate/lib/validators'
 import {Money} from 'v-money'
 
 function minMonthlyIncome(value){
@@ -246,7 +246,9 @@ export default {
                 required
             },
             other_animal:{
-                required
+                required: requiredIf(function(){
+                    this.user.other_animal === true
+                })
             }
         }
     },
@@ -296,32 +298,35 @@ export default {
             this.loading = true;
             this.submitted = true;
             this.$v.$touch();
-            console.log(this.$v.$invalid)
             if (this.$v.$invalid) {
                 this.loading = false;
                 return;
+            }else{
+                let user = {
+                    name: this.user.name,
+                    cpf: this.user.cpf,
+                    age: this.user.age,
+                    monthly_income: this.monthly_income,
+                    cep: this.user.cep,
+                    address: this.user.address,
+                    street: this.user.street,
+                    district: this.user.district,
+                    city: this.user.city,
+                    state: this.user.state
+                }
+                if (this.user.other_animal) {
+                    user.other_animal = this.user.other_animal;
+                }else{
+                    user.animal = this.user.animal,
+                    user.animal_species = this.user.animal_species
+                }
+                this.loading = false;
+                this.$toast.open({
+                    message: 'User successfully registered! Check the browser console.',
+                    type: 'success'
+                });
+                console.log(JSON.stringify(user))
             }
-            let user = {
-                name: this.user.name,
-                cpf: this.user.cpf,
-                age: this.user.age,
-                monthly_income: this.monthly_income,
-                animal: this.animal,
-                animal_species: this.user.animal_species,
-                other_animal: this.user.other_animal,
-                cep: this.user.cep,
-                address: this.user.address,
-                street: this.user.street,
-                district: this.user.district,
-                city: this.user.city,
-                state: this.user.state
-            }
-            this.loading = false;
-            this.$toast.open({
-                message: 'User successfully registered! Check the browser console.',
-                type: 'success'
-            });
-            console.log(JSON.stringify(user))
         }
     }
 }
