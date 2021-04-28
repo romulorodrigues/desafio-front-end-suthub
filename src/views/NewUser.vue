@@ -26,7 +26,9 @@
                     <div class="input-box">
                         <label for="">Age</label>
                         <input type="text" v-model="user.age" id="age" name="age" class="form-control" :class="{ 'is-invalid': submitted && $v.user.age.$error }" />
-                        <div v-if="submitted && !$v.user.age.required" class="invalid-feedback">Age must be over 18 and under 65</div>
+                        <!-- <div v-if="submitted && !$v.user.age.required" class="invalid-feedback">Age must be over 18 and under 65</div> -->
+                        <div class="invalid-feedback" v-if="submitted && !$v.user.age.between">Must be between {{$v.user.age.$params.between.min}} and {{$v.user.age.$params.between.max}}</div>
+                        <div v-if="submitted && !$v.user.age.required" class="invalid-feedback">Age is required</div>
                     </div>
                 </div>
                 <div class="col-lg-3">
