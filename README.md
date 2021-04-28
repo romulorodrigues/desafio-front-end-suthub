@@ -4,8 +4,8 @@ O objetivo é criar uma pequena aplicação web que seja capaz de obter uma list
 ## Instalação
 
 - Baixe o repositório como arquivo zip ou faça um clone;
-- Acesse a pasta desafio-front-end-suthub
-- Execute os comandos abaixo
+- Acesse a pasta desafio-front-end-suthub;
+- Execute os comandos abaixo.
 ```
 npm install
 npm run serve
