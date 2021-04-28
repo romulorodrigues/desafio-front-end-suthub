@@ -4,6 +4,10 @@ body{
     background-color: #F7F7F7;
 }
 
+a{
+    text-decoration: none !important;
+}
+
 .title-1{
     display: flex;
     align-items: center;
@@ -17,6 +21,11 @@ body{
     color: #6a6a6a;
 }
 
+.pagination{
+    align-items: center;
+    justify-content: center;
+}
+
 .pagination .page-item button{
     color: #007F79;
 }
@@ -24,6 +33,10 @@ body{
 .pagination button.page-link.active{
     color: #fff;
     background-color: #007F79;
+}
+
+.pagination .page-item{
+    margin: 0 4px;
 }
 
 .btn-1{

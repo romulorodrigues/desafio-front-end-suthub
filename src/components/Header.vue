@@ -9,17 +9,17 @@
                     <ul>
                         <li>
                             <router-link to="/">
-                                Início
+                                Home
                             </router-link>
                         </li>
                         <li>
                             <router-link to="/country/bra">
-                                Sobre o Brasil
+                                About Brazil
                             </router-link>
                         </li>
                         <li>
                             <button class="btn-1">
-                                Novo usuário <b-icon icon="person-plus-fill"></b-icon>
+                                New user <b-icon icon="person-plus-fill"></b-icon>
                             </button>
                         </li>
                     </ul>

@@ -5,15 +5,15 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="title-1">
-						<h1><i class="icofont-world"></i> {{total_countries}} {{(total_countries > 1) ? 'países' : 'país'}}</h1>
-						<button class="btn-1" v-on:click="resetFields()">Resetar campos <i class="icofont-loop"></i></button>
+						<h1><i class="icofont-world"></i> {{total_countries}} {{(total_countries > 1) ? 'countries' : 'country'}}</h1>
+						<button class="btn-1" v-on:click="resetFields()">reset fields  <i class="icofont-loop"></i></button>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="box">
-						<label for=""><i class="icofont-search-map"></i> Buscar por bloco regional</label>
+						<label for=""><i class="icofont-search-map"></i> Search by regional block</label>
 						<select name="" id="" class="form-control" v-model="regional_bloc" @change="onChangeRegionalBloc($event)">
 							<option value="EU">EU (European Union)</option>
 							<option value="EFTA">EFTA (European Free Trade Association)</option>
@@ -32,7 +32,7 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="box">
-						<label for=""><i class="icofont-google-talk"></i> Buscar por idioma</label>
+						<label for=""><i class="icofont-google-talk"></i> Search by language</label>
 						<select name="" id="" class="form-control" v-model="language" @change="onChangeLanguage($event)">
 							<option v-for="(item, index) in languages" v-bind:value="item.code">
 								{{item.name}}
@@ -42,7 +42,7 @@
 				</div>
 				<div class="col-lg-4">
 					<div class="box">
-						<label for=""><i class="icofont-search-1"></i> Buscar por nome</label>
+						<label for=""><i class="icofont-search-1"></i> Search by name</label>
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="" v-model="name_country">
 							<div class="input-group-btn">
@@ -54,31 +54,33 @@
 			</div>
         	<div class="row" v-show="total_countries > 0">
 				<div v-for="(item, index) in displayedCountries" class="col-lg-3">
-					<div class="countries-item">
-						<div class="countries-item-img" v-bind:style="{ backgroundImage: 'url(' + item.flag + ')' }"></div>
-						<div class="countries-item-content">
-							<h1>{{item.name}}</h1>
-							<p>
-								Coordenadas: {{item.latlng}}
-							</p>
-							<p>
-								Idiomas: 
-								<span v-for="(subitem, index) in item.languages">
-									{{subitem.name}} 
-								</span>
-							</p>
-						</div>
-						<div class="countries-item-footer">
-							<div class="countries-item-footer-item">
-								<small><i class="icofont-users-alt-5"></i> População</small>
-								<div class="small-info">{{item.population|decimal}}</div>
+					<router-link :to="{ name : 'Country', params: { code : item.alpha3Code.toLowerCase() } }">
+						<div class="countries-item">
+							<div class="countries-item-img" v-bind:style="{ backgroundImage: 'url(' + item.flag + ')' }"></div>
+							<div class="countries-item-content">
+								<h1>{{item.name}}</h1>
+								<p>
+									Latitude: {{item.latlng[0]}} / Longitude: {{item.latlng[1]}}
+								</p>
+								<p>
+									Languages: 
+									<span v-for="(subitem, index) in item.languages">
+										{{subitem.name}} 
+									</span>
+								</p>
 							</div>
-							<div class="countries-item-footer-item">
-								<small><i class="icofont-star"></i>Capital</small>
-								<div class="small-info">{{item.capital}}</div>
+							<div class="countries-item-footer">
+								<div class="countries-item-footer-item">
+									<small><i class="icofont-users-alt-5"></i> Population</small>
+									<div class="small-info">{{item.population|decimal}}</div>
+								</div>
+								<div class="countries-item-footer-item">
+									<small><i class="icofont-star"></i>Capital</small>
+									<div class="small-info">{{item.capital}}</div>
+								</div>
 							</div>
 						</div>
-					</div>
+					</router-link>
 				</div>
 				<div class="col-lg-12">
 					<nav>
@@ -105,7 +107,7 @@
 			<div class="row" v-show="total_countries == 0">
 				<div class="error">
 					<i class="icofont-sad"></i>
-					<h3>Ops. Nenhum país encontrado!</h3>
+					<h3>Oops. No countries found!</h3>
 				</div>	
 			</div>
       	</div>
@@ -457,6 +459,11 @@ export default {
 		justify-content: space-between;
 		color: #6a6a6a;
   	}
+
+	  .countries-item:hover{
+		  box-shadow: 10px 13px 9px 0px rgb(120 120 120 / 9%);
+		  transform: translateY(-5px);
+	  }
 
 	.countries-item-img{
 		background-size: cover;

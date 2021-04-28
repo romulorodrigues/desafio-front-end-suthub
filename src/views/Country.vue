@@ -7,14 +7,6 @@
                     <div class="col-lg-12">
                         <div class="section-title-content">
                             <h2>{{country.name}}</h2>
-                            <p><i class="icofont-users-alt-5"></i> População: {{country.population|decimal}}</p>
-                            <p><i class="icofont-star"></i> Capital: {{country.capital}}</p>
-                            <p>
-								<i class="icofont-chat"></i> Idiomas: 
-								<span v-for="(item, index) in country.languages">
-									{{item.name}} 
-								</span>
-							</p>
                         </div>
                     </div>
                 </div>
@@ -22,8 +14,83 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="col-lg-3 section-content-info">
+                    <p><i class="icofont-users-alt-5"></i> <b>Population:</b> {{country.population|decimal}}</p>
+                    <p><i class="icofont-star"></i> <b>Capital:</b> {{country.capital}}</p>
+                    <p><b><i class="icofont-search-map"></i> Region:</b> {{country.region}}</p>
+                    <p><b><i class="icofont-search-map"></i> Subregion:</b> {{country.subregion}}</p>
+                    <p>
+                       <b><i class="icofont-search-map"></i> Latitude:</b> {{country.latlng[0]}} / <b>Longitude:</b> {{country.latlng[1]}}
+                    </p>
+                    <p>
+                        <b> <i class="icofont-map"></i> Area (km²):</b> {{country.area|decimal}}
+                    </p>
+                </div>
+                <div class="col-lg-3 section-content-info">
+                    <p><b>Two letter code:</b> {{country.alpha2Code}}</p>
+                    <p><b>Three letter code:</b> {{country.alpha3Code}}</p>
+                    <p>
+                        <b>Numeric code:</b> {{country.numericCode}}
+                    </p>
+                    <p><b><i class="icofont-phone"></i>Call codes:</b>
+                        <span v-for="(item, index) in country.callingCodes">
+                            {{item}} 
+                        </span>
+                    </p>
+                    <p><b><i class="icofont-web"></i> Domains:</b>
+                        <span v-for="(item, index) in country.topLevelDomain">
+                            {{item}}
+                        </span>
+                    </p>
+                </div>
+                <div class="col-lg-3 section-content-info">
+                    <p><b>Regional bloc:</b>
+                        <span v-for="(item, index) in country.regionalBlocs">
+                            ({{item.acronym}}) - {{item.name}}
+                        </span>
+                    </p>
+                    <p><b><i class="icofont-clock-time"></i> Timezones:</b>
+                        <span v-for="(item, index) in country.timezones">
+                            {{item}}
+                        </span>
+                    </p>
+                    <p><b><i class="icofont-money"></i> Currencies:</b>
+                        <span v-for="(item, index) in country.currencies">
+                            {{item.symbol}} {{item.name}}
+                        </span>
+                    </p>
+                    <p><b><i class="icofont-chat"></i> Languages:</b>
+                        <span v-for="(item, index) in country.languages">
+                            {{item.name}}
+                        </span>
+                    </p>
+                    
+                </div>
+                <div class="col-lg-3 section-content-info">
+                     <p><b><i class="icofont-pencil-alt-2"></i> Alternative spellings:</b> 
+                        <span v-for="(item, index) in country.altSpellings">
+                            {{item}} 
+                        </span>
+                    </p>
+                    <p><b><i class="icofont-pencil-alt-2"></i> Translations:</b>
+                        <span v-for="(item, index) in country.translations">
+                            {{item}}
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-12">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31754308.356149822!2d-69.6865109274439!3d-13.702797008748323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9c59c7ebcc28cf%3A0x295a1506f2293e63!2sBrasil!5e0!3m2!1spt-BR!2sbr!4v1619551434410!5m2!1spt-BR!2sbr" width="100%" height="250" style="border:0; margin-top:20px" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe 
+                            width="100%" 
+                            height="250" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            marginheight="0" 
+                            marginwidth="0" 
+                            :src="'https://maps.google.com/maps?q='+country.latlng[0]+','+country.latlng[1]+'&hl=en&z=3&amp;output=embed'"
+                        >
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -95,23 +162,26 @@ export default {
         position: absolute;
         color: #fff;
         width: 100%;
-    }
-
-    .section-title-content p{
-        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .section-title-content h2{
-        padding: 50px 0 0;
-        font-size: 40px;
-        text-align: left;
+        font-size: 60px;
+        text-align: center;
+        padding-top: 100px;
     }
 
-    .section-title-content p > span::after{
+    .section-content-info{
+        margin: 40px 0;
+    }
+
+    .section-content-info p > span::after{
 		content: '/';
 	}
 
-	.section-title-content p > span:last-child::after{
+	.section-content-info p > span:last-child::after{
 		content: '';
 	}
 </style>
