@@ -35,7 +35,8 @@
                 <div class="col-lg-3">
                     <div class="input-box">
                         <label for="">Monthly income</label>
-                        <money v-model="user.monthly_income.value" v-bind="user.monthly_income" class="form-control" value="R$"></money>
+                        <money v-model="monthly_income" v-bind="user.monthly_income_options" class="form-control" value="" :class="{ 'is-invalid': submitted && $v.monthly_income.$error }"></money>
+                        <div v-if="submitted && !$v.monthly_income.min" class="invalid-feedback">The minimum value must be R$ 1.000,00</div>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -123,6 +124,14 @@ import Loader from '@/components/Loader';
 import { required, minLength, between } from 'vuelidate/lib/validators'
 import {Money} from 'v-money'
 
+function minMonthlyIncome(value){
+    if (value < 1000) {
+        return false;
+    }else{
+        return true;
+    }
+}
+
 function splitLength(value) {
     if (value.split(' ').length < 2) {
         return false;
@@ -175,6 +184,7 @@ export default {
     components: {TheMask, Loader, Money},
     data() {
         return {
+            monthly_income: 0,
             user:{
                 age: '',
                 name: '',
@@ -182,15 +192,13 @@ export default {
                 animal: '',
                 animal_species: '',
                 other_animal: '',
-                monthly_income: {
-                    value: 1000,
+                monthly_income_options: {
                     decimal: ',',
                     thousands: '.',
                     prefix: 'R$ ',
                     suffix: '',
                     precision: 2,
                     masked: false,
-                    min: 1000
                 },
                 cep: '',
                 address: '',
@@ -212,6 +220,12 @@ export default {
         }
     },
     validations: {
+
+        monthly_income:{
+            required,
+            min: minMonthlyIncome
+        },
+
         user: {
             name: {
                 required,
@@ -229,9 +243,6 @@ export default {
                 required
             },
             animal_species:{
-                required
-            },
-            monthly_income:{
                 required
             },
             other_animal:{
@@ -265,7 +276,7 @@ export default {
                 if (response.data.erro == true) {
                     this.$toast.open({
                         type: 'error',
-                        message: 'Nenhuma cidade encontrada.'
+                        message: 'No cities found.'
                     });
                 }else{
                     this.user.address = response.data.logradouro+', '+response.data.bairro+', '+response.data.localidade+' - '+response.data.uf;
@@ -282,11 +293,35 @@ export default {
         },
         
         submitForm(){
+            this.loading = true;
             this.submitted = true;
             this.$v.$touch();
+            console.log(this.$v.$invalid)
             if (this.$v.$invalid) {
+                this.loading = false;
                 return;
             }
+            let user = {
+                name: this.user.name,
+                cpf: this.user.cpf,
+                age: this.user.age,
+                monthly_income: this.monthly_income,
+                animal: this.animal,
+                animal_species: this.user.animal_species,
+                other_animal: this.user.other_animal,
+                cep: this.user.cep,
+                address: this.user.address,
+                street: this.user.street,
+                district: this.user.district,
+                city: this.user.city,
+                state: this.user.state
+            }
+            this.loading = false;
+            this.$toast.open({
+                message: 'User successfully registered! Check the browser console.',
+                type: 'success'
+            });
+            console.log(JSON.stringify(user))
         }
     }
 }
