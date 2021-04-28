@@ -183,5 +183,28 @@ export default {
 
 	.section-content-info p > span:last-child::after{
 		content: '';
+    }
+    
+    /* 
+	##Device = Most of the Smartphones Mobiles (Portrait)
+	##Screen = B/w 320px to 479px
+	*/
+
+	@media (min-width: 320px) and (max-width: 480px) {
+		.section-title {
+            height: 25vh;
+        }
+        .section-content-info {
+            margin: 20px 0;
+        }
+	}
+
+	/* 
+	##Device = Tablets, Ipads (portrait)
+	##Screen = B/w 768px to 1024px
+	*/
+
+	@media (min-width: 768px) and (max-width: 1024px) {
+		
 	}
 </style>

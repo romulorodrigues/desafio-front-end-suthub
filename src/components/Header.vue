@@ -2,10 +2,10 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-sm-4">
                     <img src="@/assets/logo-suthub.png" alt="Suthub" class="logo">
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-8 col-sm-8">
                     <ul>
                         <li>
                             <router-link to="/">
@@ -18,9 +18,11 @@
                             </router-link>
                         </li>
                         <li>
-                            <button class="btn-1">
-                                New user <b-icon icon="person-plus-fill"></b-icon>
-                            </button>
+                            <router-link to="/new-user">
+                                <button class="btn-1">
+                                    New user <b-icon icon="person-plus-fill"></b-icon>
+                                </button>
+                             </router-link>
                         </li>
                     </ul>
                 </div>
@@ -71,4 +73,37 @@ export default {
         text-decoration: none;
         color: #000;
     }
+
+     /* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+    */
+
+    @media (min-width: 320px) and (max-width: 480px) {
+        .logo{
+            margin: 20px auto;
+            display: block;
+            float: inherit;
+        }
+
+        header ul {
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+        }
+
+        header ul li{
+            margin: 0px 5px 20px;
+        }
+    }
+
+    /* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+    */
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+       
+    }
+  
 </style>

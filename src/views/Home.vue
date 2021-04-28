@@ -53,7 +53,7 @@
 				</div>
 			</div>
         	<div class="row" v-show="total_countries > 0">
-				<div v-for="(item, index) in displayedCountries" class="col-lg-3">
+				<div v-for="(item, index) in displayedCountries" class="col-lg-3 col-sm-6">
 					<router-link :to="{ name : 'Country', params: { code : item.alpha3Code.toLowerCase() } }">
 						<div class="countries-item">
 							<div class="countries-item-img" v-bind:style="{ backgroundImage: 'url(' + item.flag + ')' }"></div>
@@ -86,7 +86,7 @@
 					<nav>
 						<ul class="pagination">
 							<li class="page-item">
-								<button type="button" class="page-link" v-if="page != 1" @click="page = 1"> Primeira  </button>
+								<button type="button" class="page-link" v-if="page != 1" @click="page = 1"> First  </button>
 							</li>
 							<li class="page-item">
 								<button type="button" class="page-link" v-if="page != 1" @click="page--"> &lt; </button>
@@ -98,7 +98,7 @@
 								<button type="button" @click="page++" v-if="page < pages.length" class="page-link"> > </button>
 							</li>
 							<li class="page-item">
-								<button type="button" v-if="page < pages.length" @click="page = pages.length" class="page-link"> Última </button>
+								<button type="button" v-if="page < pages.length" @click="page = pages.length" class="page-link"> Last </button>
 							</li>
 						</ul>
 					</nav>	
@@ -544,5 +544,27 @@ export default {
 	.input-group button{
 		border: 1px solid #ced4da;
     	border-radius: 0;
+	}
+
+	/* 
+	##Device = Most of the Smartphones Mobiles (Portrait)
+	##Screen = B/w 320px to 479px
+	*/
+
+	@media (min-width: 320px) and (max-width: 480px) {
+		.box{
+			margin-bottom: 15px;
+		}
+	}
+
+	/* 
+	##Device = Tablets, Ipads (portrait)
+	##Screen = B/w 768px to 1024px
+	*/
+
+	@media (min-width: 768px) and (max-width: 1024px) {
+		.box{
+			margin-bottom: 15px;
+		}
 	}
 </style>

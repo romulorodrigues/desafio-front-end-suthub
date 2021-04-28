@@ -1,17 +1,22 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import '@/assets/icofont.min.css';
+import '@/assets/style.css';
 
-// Import Bootstrap an BootstrapVue CSS files (order is important)
+
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
-import '@/assets/icofont.min.css';
-import '@/assets/style.css';
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+Vue.use(VueToast);
+
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 
