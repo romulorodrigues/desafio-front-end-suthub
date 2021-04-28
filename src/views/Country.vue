@@ -122,7 +122,7 @@ export default {
         this.getByCountry();
     },
     methods:{
-        getByCountry(code){
+        getByCountry(){
             this.loading = true;
 			this.$http.get('/alpha/'+this.code.toLowerCase())
 			.then((response) => {
@@ -196,6 +196,11 @@ export default {
         }
         .section-content-info {
             margin: 20px 0;
+        }
+        .section-title-content h2 {
+            font-size: 30px;
+            text-align: center;
+            padding-top: 60px;
         }
 	}
 

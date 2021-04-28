@@ -60,7 +60,7 @@ export default {
     }
 
     header ul li{
-        margin: 0 15px;  
+        margin: 5px 15px;  
     }
 
     header ul li a{ 

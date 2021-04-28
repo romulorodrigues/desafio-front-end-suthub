@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: #F7F7F7;
+    overflow-x: hidden;
 }
 
 a{
@@ -71,7 +72,7 @@ a{
 
 @media (min-width: 320px) and (max-width: 480px) {
     .title-1 h1{
-        font-size: 15px;
+        font-size: 21px;
     }
 }
 

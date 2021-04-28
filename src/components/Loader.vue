@@ -40,4 +40,15 @@ export default {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
+
+    /* 
+	##Device = Most of the Smartphones Mobiles (Portrait)
+	##Screen = B/w 320px to 479px
+	*/
+
+	@media (min-width: 320px) and (max-width: 480px) {
+		.loader{
+            left: 35%; 
+        }
+	}
 </style>
